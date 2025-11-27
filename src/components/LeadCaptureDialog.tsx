@@ -6,6 +6,13 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
+import { z } from "zod";
+
+const leadSchema = z.object({
+  name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
+  phone: z.string().trim().min(8, "Telefone inválido").max(20, "Telefone muito longo"),
+  email: z.string().trim().email("Email inválido").max(255, "Email muito longo")
+});
 
 interface LeadCaptureDialogProps {
   open: boolean;
@@ -22,21 +29,14 @@ export const LeadCaptureDialog = ({ open, onOpenChange }: LeadCaptureDialogProps
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name.trim() || !phone.trim() || !email.trim()) {
+    // Validate using zod schema
+    const validation = leadSchema.safeParse({ name, phone, email });
+    
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast({
-        title: "Email inválido",
-        description: "Por favor, insira um email válido.",
+        title: "Erro de validação",
+        description: firstError.message,
         variant: "destructive",
       });
       return;
@@ -45,10 +45,11 @@ export const LeadCaptureDialog = ({ open, onOpenChange }: LeadCaptureDialogProps
     setIsSubmitting(true);
 
     try {
-      // Save to database
+      // Save to database with validated data
+      const { name: validatedName, phone: validatedPhone, email: validatedEmail } = validation.data;
       const { error } = await supabase
         .from('leads')
-        .insert([{ name: name.trim(), phone: phone.trim(), email: email.trim() }]);
+        .insert([{ name: validatedName, phone: validatedPhone, email: validatedEmail }]);
 
       if (error) throw error;
 
@@ -69,7 +70,6 @@ export const LeadCaptureDialog = ({ open, onOpenChange }: LeadCaptureDialogProps
       }, 1000);
 
     } catch (error) {
-      console.error("Error submitting lead:", error);
       toast({
         title: "Erro ao enviar",
         description: "Ocorreu um erro. Por favor, tente novamente.",
