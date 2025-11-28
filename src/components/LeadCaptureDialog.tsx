@@ -8,6 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { z } from "zod";
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 const leadSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
   phone: z.string().trim().min(8, "Telefone inválido").max(20, "Telefone muito longo"),
@@ -52,6 +58,12 @@ export const LeadCaptureDialog = ({ open, onOpenChange }: LeadCaptureDialogProps
         .insert([{ name: validatedName, phone: validatedPhone, email: validatedEmail }]);
 
       if (error) throw error;
+
+      // Send event to Google Tag Manager
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'send_form'
+      });
 
       toast({
         title: "Dados enviados!",
