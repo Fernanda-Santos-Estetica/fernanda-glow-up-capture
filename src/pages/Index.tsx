@@ -168,7 +168,7 @@ const Index = () => {
                 </li>
               </ul>
               <Button size="lg" onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth">
-                Agendar Minha Avaliação Gratuita
+                Agendar Minha Avaliação 
               </Button>
             </div>
             <div className="relative">
