@@ -161,11 +161,11 @@ const Index = () => {
               { img: resultado4, title: "Contorno Corporal" }
             ].map((result, index) => (
               <Card key={index} className="overflow-hidden border-border bg-card hover:shadow-elegant transition-smooth group">
-                <div className="relative">
+                <div className="relative aspect-[4/3]">
                   <img 
                     src={result.img} 
                     alt={`Resultado ${result.title}`} 
-                    className="w-full h-auto object-cover"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-4">
                     <p className="text-foreground font-medium text-center">{result.title}</p>
