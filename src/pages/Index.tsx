@@ -8,6 +8,7 @@ import fernanda1 from "@/assets/fernanda-1.jpg";
 import fernanda2 from "@/assets/fernanda-2.jpg";
 import fernanda3 from "@/assets/fernanda-3.jpg";
 import fernanda4 from "@/assets/fernanda-4.jpg";
+import clinicStorefront from "@/assets/clinic-storefront.jpg";
 const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const services = [{
@@ -180,8 +181,60 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Location Section */}
       <section className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">
+              Nossa Localização
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Venha nos visitar e conhecer nossa estrutura
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative rounded-3xl overflow-hidden shadow-elegant">
+              <img 
+                src={clinicStorefront} 
+                alt="Fachada da Transforma Clinic" 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-serif font-bold text-foreground">Transforma Clinic</h3>
+                <p className="text-lg text-muted-foreground">Estética e Saúde</p>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-foreground font-medium">Endereço</p>
+                    <p className="text-muted-foreground">Rua Custodio da Silva Geraldo - Joáia</p>
+                    <p className="text-muted-foreground">Tijucas - SC, 88200-000</p>
+                  </div>
+                </div>
+              </div>
+              <Button 
+                size="lg" 
+                onClick={() => setDialogOpen(true)} 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth"
+              >
+                Agendar Visita
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 px-4 bg-secondary/30">
         <div className="container mx-auto max-w-4xl text-center space-y-8">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">
             Pronta para se transformar?
