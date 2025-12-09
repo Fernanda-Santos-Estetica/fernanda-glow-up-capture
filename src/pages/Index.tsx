@@ -9,6 +9,10 @@ import fernanda2 from "@/assets/fernanda-2.jpg";
 import fernanda3 from "@/assets/fernanda-3.jpg";
 import fernanda4 from "@/assets/fernanda-4.jpg";
 import clinicStorefront from "@/assets/clinic-storefront.jpg";
+import resultado1 from "@/assets/resultado-1.jpg";
+import resultado2 from "@/assets/resultado-2.jpg";
+import resultado3 from "@/assets/resultado-3.jpg";
+import resultado4 from "@/assets/resultado-4.jpg";
 const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const services = [{
@@ -132,6 +136,48 @@ const Index = () => {
           <div className="text-center mt-12">
             <Button size="lg" onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth">
               Quero Conhecer os Tratamentos
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Section */}
+      <section className="py-20 px-4 bg-secondary/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">
+              Resultados Reais
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Veja as transformações incríveis de nossas pacientes
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              { img: resultado1, title: "Tratamento de Flacidez Abdominal" },
+              { img: resultado2, title: "Redução de Flacidez" },
+              { img: resultado3, title: "Tratamento de Braços" },
+              { img: resultado4, title: "Contorno Corporal" }
+            ].map((result, index) => (
+              <Card key={index} className="overflow-hidden border-border bg-card hover:shadow-elegant transition-smooth group">
+                <div className="relative">
+                  <img 
+                    src={result.img} 
+                    alt={`Resultado ${result.title}`} 
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-4">
+                    <p className="text-foreground font-medium text-center">{result.title}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button size="lg" onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth">
+              Quero Resultados Assim
             </Button>
           </div>
         </div>
