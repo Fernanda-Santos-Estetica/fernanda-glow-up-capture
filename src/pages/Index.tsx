@@ -8,11 +8,6 @@ import fernanda1 from "@/assets/fernanda-1.jpg";
 import fernanda2 from "@/assets/fernanda-2.jpg";
 import fernanda3 from "@/assets/fernanda-3.jpg";
 import fernanda4 from "@/assets/fernanda-4.jpg";
-import resultado1 from "@/assets/resultado-1.png";
-import resultado2 from "@/assets/resultado-2.jpg";
-import resultado3 from "@/assets/resultado-3.png";
-import resultado4 from "@/assets/resultado-4.png";
-import resultado5 from "@/assets/resultado-5.png";
 const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const services = [{
@@ -136,50 +131,6 @@ const Index = () => {
           <div className="text-center mt-12">
             <Button size="lg" onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth">
               Quero Conhecer os Tratamentos
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Results Section */}
-      <section className="py-20 px-4 bg-secondary/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground">
-              Resultados Reais
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Veja as transformações incríveis das nossas pacientes
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[
-              { src: resultado1, alt: "Resultado tratamento facial - antes e depois" },
-              { src: resultado2, alt: "Tratamento de acne - antes e depois" },
-              { src: resultado3, alt: "Preenchimento labial - antes e depois" },
-              { src: resultado4, alt: "Tratamento de papada - antes e depois" },
-              { src: resultado5, alt: "Tratamento de flacidez abdominal - antes e depois" },
-            ].map((resultado, index) => (
-              <div 
-                key={index} 
-                className="relative rounded-2xl overflow-hidden shadow-elegant group cursor-pointer"
-              >
-                <img 
-                  src={resultado.src} 
-                  alt={resultado.alt} 
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                  <span className="text-primary-foreground font-medium text-sm">Antes & Depois</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button size="lg" onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-soft transition-smooth">
-              Quero Resultados Como Esses
             </Button>
           </div>
         </div>
