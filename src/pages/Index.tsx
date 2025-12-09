@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { LeadCaptureDialog } from "@/components/LeadCaptureDialog";
-import { Sparkles, Heart, Zap, Star } from "lucide-react";
+import { Sparkles, Heart, Zap, Star, X } from "lucide-react";
 import logoImg from "@/assets/logo-transforma.jpg";
 import fernanda1 from "@/assets/fernanda-1.jpg";
 import fernanda2 from "@/assets/fernanda-2.jpg";
@@ -13,8 +14,10 @@ import resultado1 from "@/assets/resultado-1.jpg";
 import resultado2 from "@/assets/resultado-2.jpg";
 import resultado3 from "@/assets/resultado-3.jpg";
 import resultado4 from "@/assets/resultado-4.jpg";
+
 const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<{ img: string; title: string } | null>(null);
   const services = [{
     icon: Zap,
     title: "Emagrecimento",
@@ -160,15 +163,24 @@ const Index = () => {
               { img: resultado3, title: "Tratamento de Braços" },
               { img: resultado4, title: "Contorno Corporal" }
             ].map((result, index) => (
-              <Card key={index} className="overflow-hidden border-border bg-card hover:shadow-elegant transition-smooth group">
+              <Card 
+                key={index} 
+                className="overflow-hidden border-border bg-card hover:shadow-elegant transition-smooth group cursor-pointer"
+                onClick={() => setSelectedImage(result)}
+              >
                 <div className="relative aspect-[4/3]">
                   <img 
                     src={result.img} 
                     alt={`Resultado ${result.title}`} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-4">
                     <p className="text-foreground font-medium text-center">{result.title}</p>
+                  </div>
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors flex items-center justify-center">
+                    <span className="text-primary-foreground bg-primary/80 px-3 py-1 rounded-full text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      Clique para ampliar
+                    </span>
                   </div>
                 </div>
               </Card>
@@ -306,6 +318,24 @@ const Index = () => {
 
       {/* Lead Capture Dialog */}
       <LeadCaptureDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+
+      {/* Image Viewer Dialog */}
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl w-full p-0 bg-background border-border overflow-hidden">
+          {selectedImage && (
+            <div className="relative">
+              <img 
+                src={selectedImage.img} 
+                alt={selectedImage.title} 
+                className="w-full h-auto max-h-[85vh] object-contain"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent p-6">
+                <p className="text-foreground font-serif font-bold text-xl text-center">{selectedImage.title}</p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>;
 };
 export default Index;
